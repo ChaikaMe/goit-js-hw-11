@@ -9,13 +9,6 @@ const searchButton = document.querySelector('.search-button');
 const searchBar = document.querySelector('.search-settings');
 const loading = document.querySelector('.loading-text');
 
-const lightbox = new SimpleLightbox('images-list a', {
-    nav: true,
-    captions: true,
-    captionsData: 'alt',
-    captionDelay: 200,
-})
-
 searchButton.addEventListener('click', search);
 
 function search(event) {
@@ -27,10 +20,17 @@ function search(event) {
             loading.classList.toggle('visually-hidden');
             imagesList.innerHTML = '';
             imagesList.insertAdjacentHTML("beforeend", render(images)); 
+            const lightbox =
+                new SimpleLightbox('.images-list a', {
+                nav: true,
+                captions: true,
+                captionsData: 'alt',
+                captionDelay: 200,
+                })
+            lightbox.refresh();
         })
         .catch (error => {
         console.log(error);
         });
-    lightbox.refresh();
     searchBar.value = '';
 }
