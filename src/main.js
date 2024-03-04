@@ -7,21 +7,24 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 const imagesList = document.querySelector(".images-list");
 const searchButton = document.querySelector('.search-button');
 const searchBar = document.querySelector('.search-settings');
+const loading = document.querySelector('.loading-text');
 
 const lightbox = new SimpleLightbox('images-list a', {
     nav: true,
     captions: true,
     captionsData: 'alt',
-    captionDelay: 150,
+    captionDelay: 200,
 })
 
 searchButton.addEventListener('click', search);
 
 function search(event) {
     event.preventDefault();
+    loading.classList.toggle('visually-hidden');
     const query = searchBar.value.trim();
     getImages(query)
         .then(images => {
+            loading.classList.toggle('visually-hidden');
             imagesList.innerHTML = '';
             imagesList.insertAdjacentHTML("beforeend", render(images)); 
         })
