@@ -1,6 +1,6 @@
 export function render(images) {
     const markup = images
-        .map((image) => `
+        .map(image => `
             <li class="images-list-item">
                 <a class="item-link" href="${image.largeImageURL}">
                     <img 
